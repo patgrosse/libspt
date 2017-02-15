@@ -1,9 +1,4 @@
 include ../Makefile.inc
-include Makefile.inc
-
-ifdef NO_LIBEVENT
-CFLAGS += -DNO_LIBEVENT=1
-endif
 
 all: $(LIBSPT_OBJS)
 
@@ -13,7 +8,7 @@ $(LIBSPT_OBJS_DIR)/%.o: %.c
 $(LIBSPT_OBJS): | $(LIBSPT_OBJS_DIR)
 
 $(LIBSPT_OBJS_DIR):
-	mkdir -p $(LIBSPT_OBJS_DIR)
+	$(MKDIR) -p $@
 
 clean:
-	-$(RM) -f $(LIBSPT_OBJS_DIR)/*
+	$(RM) $(LIBSPT_OBJS)
