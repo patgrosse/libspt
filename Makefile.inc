@@ -46,4 +46,7 @@ ifndef __LIBSPT_ENV_VAR_PARSED
     else
         LDFLAGS += -levent
     endif
+    ifdef NO_TERMIOS
+        CFLAGS += -DNO_TERMIOS=1
+    endif
 endif
