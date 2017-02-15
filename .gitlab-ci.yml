@@ -2,7 +2,7 @@ stages:
   - clean
   - build
 before_script:
-  - "apt-get update -qq && apt-get install -y -qq libevent-dev make"
+  - "apt-get update -qq && apt-get install -y -qq libevent-dev make gcc"
 makeclean:
   stage: clean
   script:
