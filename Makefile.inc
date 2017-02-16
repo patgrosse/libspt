@@ -1,8 +1,9 @@
 # used commands and flags
 export CC ?= gcc
 export LDFLAGS += -lpthread
-export CFLAGS ?= -g -Werror -Wall -Wextra -Wfloat-equal -Wundef -Wshadow -Wcast-align -Wstrict-prototypes -Wstrict-overflow=5 \
-	-Wno-write-strings -Waggregate-return -Wcast-qual -Wswitch-default -Wswitch-enum -Wunreachable-code
+export CFLAGS ?= -g -std=gnu99 -Werror -Wall -Wextra -Wfloat-equal -Wundef -Wshadow -Wcast-align -Wstrict-prototypes \
+	-Wstrict-overflow=5 -Wno-write-strings -Waggregate-return -Wcast-qual -Wswitch-default -Wswitch-enum \
+	-Wunreachable-code
 export LD ?= gcc
 export AR ?= ar
 export RM ?= rm

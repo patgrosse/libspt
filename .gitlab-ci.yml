@@ -1,9 +1,10 @@
+image: rikorose/gcc-cmake
 stages:
   - clean
   - build
   - test
 before_script:
-  - "apt-get update -qq && apt-get install -y -qq libevent-dev make gcc"
+  - "apt-get update -qq && apt-get install -y -qq libevent-dev"
 makeclean:
   stage: clean
   script:
@@ -22,7 +23,6 @@ makeNoLibevent:
 cmakeTests:
   stage: test
   script:
-    - "apt-get install -y -qq cmake"
     - "git submodule sync --recursive"
     - "git submodule update --init --recursive"
     - "cd tests"

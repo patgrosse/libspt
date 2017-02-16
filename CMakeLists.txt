@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.6)
 project(libspt)
 
 # flags
-set(CMAKE_C_FLAGS "-Werror -Wall -Wextra")
-set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS} -g -Wfloat-equal -Wundef -Wshadow -Wcast-align \
+set(CMAKE_C_FLAGS "-Werror -Wall -Wextra -std=gnu99")
+set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS} -Wfloat-equal -Wundef -Wshadow -Wcast-align \
 -Wstrict-prototypes -Wstrict-overflow=5 -Wno-write-strings -Waggregate-return -Wcast-qual -Wswitch-default \
 -Wswitch-enum -Wunreachable-code")
 set(CMAKE_C_STANDARD 99)
