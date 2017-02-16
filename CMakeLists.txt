@@ -27,3 +27,6 @@ set(SOURCE_FILES
 add_executable(serialexample ${SOURCE_FILES})
 target_link_libraries(serialexample ${LIBEVENT_LIB})
 target_link_libraries(serialexample ${CMAKE_THREAD_LIBS_INIT})
+
+# tests
+add_subdirectory(tests)
