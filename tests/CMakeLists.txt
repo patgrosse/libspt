@@ -1,3 +1,4 @@
+cmake_minimum_required(VERSION 3.0)
 project(libspt_tests)
 
 add_subdirectory(lib/googletest/googletest)
