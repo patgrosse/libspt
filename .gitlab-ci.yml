@@ -37,6 +37,7 @@ doxygenDocs:
   image: iimuz/doxygen
   when: always
   script:
+    - "mkdir -p build/doxygen"
     - "doxygen Doxyfile"
   artifacts:
     paths:
