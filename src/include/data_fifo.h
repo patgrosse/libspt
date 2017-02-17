@@ -21,6 +21,7 @@ typedef struct {
     size_t head;
     size_t tail;
     size_t size;
+    bool full;
     pthread_mutex_t mutex;
     pthread_cond_t data_available;
 } fifo_t;

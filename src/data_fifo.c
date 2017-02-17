@@ -9,13 +9,20 @@
 
 #include <pthread.h>
 #include <malloc.h>
+#include <errno.h>
 #include <stdio.h>
 
 #include <data_fifo.h>
 
 int8_t fifo_init(fifo_t *f, const size_t size) {
+    if (size == 0) {
+        errno = EINVAL;
+        perror("Illegal FIFO size");
+        return -1;
+    }
     f->head = 0;
     f->tail = 0;
+    f->full = false;
     f->size = size;
     f->buf = malloc(size);
     if (pthread_mutex_init(&f->mutex, NULL)) {
@@ -44,12 +51,13 @@ ssize_t fifo_read(fifo_t *f, void *buf, const size_t bytes) {
     char *p;
     p = buf;
     for (i = 0; i < bytes; i++) {
-        if (f->tail != f->head) { //see if any data is available
+        if (f->tail != f->head || f->full) { //see if any data is available
             *p++ = f->buf[f->tail];  //grab a byte from the buffer
             f->tail++;  //increment the tail
             if (f->tail == f->size) {  //check for wrap-around
                 f->tail = 0;
             }
+            f->full = false;
         } else {
             ret = i; //number of bytes read
             goto out;
@@ -74,8 +82,7 @@ ssize_t fifo_write(fifo_t *f, const void *buf, const size_t bytes) {
     p = buf;
     for (i = 0; i < bytes; i++) {
         //first check to see if there is space in the buffer
-        if ((f->head + 1 == f->tail) ||
-            ((f->head + 1 == f->size) && (f->tail == 0))) {
+        if (f->full) {
             written_bytes = i; //no more room
             goto out;
         } else {
@@ -83,6 +90,9 @@ ssize_t fifo_write(fifo_t *f, const void *buf, const size_t bytes) {
             f->head++;  //increment the head
             if (f->head == f->size) {  //check for wrap-around
                 f->head = 0;
+            }
+            if (f->head == f->tail) {
+                f->full = true;
             }
         }
     }
@@ -107,5 +117,5 @@ void fifo_destroy(fifo_t *f) {
 }
 
 bool fifo_empty(fifo_t *f) {
-    return f->head == f->tail;
+    return f->head == f->tail && !f->full;
 }
