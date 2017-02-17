@@ -11,11 +11,11 @@
  */
 
 /**
- * @brief       base64 encoder and decoder
- * @{
+ * @brief   base64 encoder and decoder
+ * @file    base64.h
+ * @author  Martin Landsmann <Martin.Landsmann@HAW-Hamburg.de>
  *
- * @brief       encoding and decoding functions for base64
- * @author      Martin Landsmann <Martin.Landsmann@HAW-Hamburg.de>
+ * encoding and decoding functions for base64
  */
 
 #ifndef BASE64_ENCODER_DECODER_H
@@ -93,6 +93,4 @@ size_t base64_required_size_from_base64(size_t base64_in_size);
 #ifdef __cplusplus
 }
 #endif
-
-/** @} */
 #endif /* BASE64_ENCODER_DECODER_H */

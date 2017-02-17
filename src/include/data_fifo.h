@@ -7,6 +7,12 @@
  * based on https://stratifylabs.co/embedded%20design%20tips/2013/10/02/Tips-A-FIFO-Buffer-Implementation/
  */
 
+/**
+ * @brief   data FIFO queue
+ * @file    data_fifo.h
+ * @author  Patrick Grosse <patrick.grosse@uni-muenster.de>
+ */
+
 #ifndef LIBSPT_CHAR_FIFO_H
 #define LIBSPT_CHAR_FIFO_H
 
@@ -14,15 +20,22 @@
 #include <stdint.h>
 
 /**
- * Represents a circular FIFO queue
+ * @brief Represents a circular FIFO queue
  */
 typedef struct {
+    /** @brief The internal buffer */
     char *buf;
+    /** @brief Head index */
     size_t head;
+    /** @brief Tail index */
     size_t tail;
+    /** @brief Size of the queue */
     size_t size;
+    /** @brief Indicator if the FIFO is full */
     bool full;
+    /** @brief Mutex for mutual exclusion */
     pthread_mutex_t mutex;
+    /** @brief Condition that is signaled when data becomes available */
     pthread_cond_t data_available;
 } fifo_t;
 

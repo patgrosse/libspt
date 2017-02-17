@@ -15,7 +15,7 @@
 
 #include <tty_utils.h>
 
-int set_interface_attribs(int fd, speed_t speed) {
+int8_t set_interface_attribs(int fd, speed_t speed) {
     struct termios tty;
     if (tcgetattr(fd, &tty) != 0) {
         perror("error on tcgetattr in set_interface_attribs");
@@ -60,7 +60,7 @@ int set_interface_attribs(int fd, speed_t speed) {
     return 0;
 }
 
-int init_serial_connection(const int fd) {
+int8_t init_serial_connection(const int fd) {
     if (set_interface_attribs(fd, B115200) != 0) {
         return -1;
     }

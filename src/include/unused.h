@@ -4,6 +4,12 @@
  *  Copyright (C) 2017 Patrick Grosse <patrick.grosse@uni-muenster.de>
  */
 
+/**
+ * @brief   macros for unused symbols
+ * @file    unused.h
+ * @author  Patrick Grosse <patrick.grosse@uni-muenster.de>
+ */
+
 #ifndef LIBSPT_UNUSED_H
 #define LIBSPT_UNUSED_H
 

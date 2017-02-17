@@ -4,6 +4,12 @@
  *  Copyright (C) 2017 Patrick Grosse <patrick.grosse@uni-muenster.de>
  */
 
+/**
+ * @brief   input/output management for serial data streams
+ * @file    serial_io.h
+ * @author  Patrick Grosse <patrick.grosse@uni-muenster.de>
+ */
+
 #ifndef LIBSPT_SERIAL_IO_H
 #define LIBSPT_SERIAL_IO_H
 
@@ -11,8 +17,17 @@
 
 #include <data_fifo.h>
 
+/**
+ * The default cache size for the internal cache
+ */
 #define DEFAULT_CACHE_BUFFER_SIZE 2000
+/**
+ * The default buffer size for the data output
+ */
 #define DEFAULT_PRINT_BUFFER_SIZE 200
+/**
+ * The default cache size for a single read
+ */
 #define DEFAULT_READ_BUFFER_SIZE 200
 
 /**
@@ -21,28 +36,42 @@
 typedef void (*serial_io_receive_cb)(const size_t, const char *, void *arg);
 
 /**
- * Context of a serial input/output
+ * @brief Context of a serial input/output
  */
 struct serial_io_context {
     /* user variables */
+    /** @brief Input file descriptor */
     int fd_in;
+    /** @brief Output file descriptor */
     int fd_out;
+    /** @brief Size of the cache buffer */
     size_t cache_buffer_size;
+    /** @brief Size of the print buffer */
     size_t print_buffer_size;
+    /** @brief Size of the read buffer */
     size_t read_buffer_size;
 
     /* user callback */
+    /** @brief Callback function */
     serial_io_receive_cb data_received;
+    /** @brief Parameter to pass to the function */
     void *data_received_arg;
 
     /* internal variables */
+    /** @brief Buffer for outputs */
     char *print_buffer;
+    /** @brief Buffer for inputs */
     char *read_buffer;
+    /** @brief Thread for reads */
     pthread_t event_thread;
+    /** @brief Thread for outputs */
     pthread_t print_thread;
+    /** @brief FIFO for the internal cache */
     fifo_t *read_fifo;
 #ifndef NO_LIBEVENT
+    /** @brief The libevent event base for reads */
     struct event_base *ebase;
+    /** @brief The libevent event for the input fd */
     struct event *readev;
 #endif
 };

@@ -4,6 +4,12 @@
  *  Copyright (C) 2017 Patrick Grosse <patrick.grosse@uni-muenster.de>
  */
 
+/**
+ * @brief   transfer of packets side by side with plain text over serial data connections
+ * @file    spt.h
+ * @author  Patrick Grosse <patrick.grosse@uni-muenster.de>
+ */
+
 #ifndef LIBSPT_SPT_H
 #define LIBSPT_SPT_H
 
@@ -24,10 +30,12 @@ typedef uint16_t base64_len_t;
 struct spt_context;
 
 /**
- * A data packet with a fixed length
+ * @brief A data packet with a fixed length
  */
 struct serial_data_packet {
+    /** @brief Length of the data in this packet */
     uint16_t len;
+    /** @brief Data in this packet */
     char *data;
 };
 
@@ -37,20 +45,29 @@ struct serial_data_packet {
 typedef void(*received_packet_cb)(struct spt_context *, struct serial_data_packet *);
 
 /**
- * A struct to store all required data for spt transfers
+ * @brief A struct to store all required data for spt transfers
  */
 struct spt_context {
     /* user variables */
+    /** @brief Serial IO context */
     struct serial_io_context *sictx;
+    /** @brief Callback function when a packet is received */
     received_packet_cb callback;
 
     /* internal variables */
+    /** @brief If the log is currently in an existing line (no LF) */
     bool log_in_line;
+    /** @brief If we are currently processing a packet from the input fd */
     bool processing_packet;
+    /** @brief Amount of bytes received for the packet length */
     size_t recv_base64_len_bytes_amount;
+    /** @brief Received bytes of the packet length */
     char *recv_base64_len_bytes;
+    /** @brief Expected length for the currently receiving packet */
     base64_len_t expected_base64_data_bytes_amount;
+    /** @brief Amount of bytes received for the current packet */
     size_t received_base64_data_bytes_amount;
+    /** @brief Bytes that have been received of the packet data */
     char *received_base64_data_bytes;
 };
 

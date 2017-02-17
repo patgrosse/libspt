@@ -10,17 +10,6 @@
  * directory for more details.
  */
 
-/**
- * @ingroup base64
- * @{
- * @file
- * @brief   Functions to encode and decode base64
- *
- * @author  Martin Landsmann <Martin.Landsmann@HAW-Hamburg.de>
- * @}
- *
- */
-
 #include "base64.h"
 
 #define BASE64_CAPITAL_UPPER_BOUND     (25)     /**< base64 'Z'           */

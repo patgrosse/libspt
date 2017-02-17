@@ -3,6 +3,7 @@ stages:
   - clean
   - build
   - test
+  - docs
 before_script:
   - "apt-get update -qq && apt-get install -y -qq libevent-dev"
 makeclean:
@@ -31,3 +32,11 @@ cmakeTests:
     - "cmake .."
     - "make"
     - "./runTests"
+docs:
+  image: iimuz/doxygen
+  when: always
+  script:
+    - "doxygen Doxygen"
+  artifacts:
+    paths:
+      - "build/doxygen"
