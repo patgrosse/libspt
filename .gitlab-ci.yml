@@ -32,7 +32,8 @@ cmakeTests:
     - "cmake .."
     - "make"
     - "./runTests"
-docs:
+doxygenDocs:
+  stage: docs
   image: iimuz/doxygen
   when: always
   script:
