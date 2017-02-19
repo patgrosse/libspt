@@ -44,11 +44,11 @@ export LIBSPT_OBJS = $(addprefix $(LIBSPT_OBJS_DIR)/, $(LIBSPT_CFILES:.c=.o))
 ifndef __LIBSPT_ENV_VAR_PARSED
     export __LIBSPT_ENV_VAR_PARSED := 1
     ifdef NO_LIBEVENT
-        CFLAGS += -DNO_LIBEVENT=1
+        LIBSPT_CFLAGS += -DNO_LIBEVENT=1
     else
         LDFLAGS += -levent
     endif
     ifdef NO_TERMIOS
-        CFLAGS += -DNO_TERMIOS=1
+        LIBSPT_CFLAGS += -DNO_TERMIOS=1
     endif
 endif

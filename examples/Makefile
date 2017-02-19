@@ -13,7 +13,7 @@ $(OUT_DIR)/serialexample: $(OBJS) $(LIBSPT_LIB_FILE) $(OUT_DIR)
 	$(CC) -o $@ $(OBJS) $(LIBSPT_LIB_FILE) $(LDFLAGS)
 
 $(OUT_DIR)/serialexample.o: serialexample.c $(OUT_DIR)
-	$(CC) $(CFLAGS) $(LIBSPT_INCLUDES) -c $< -o $@
+	$(CC) $(LIBSPT_CFLAGS) $(LIBSPT_INCLUDES) -c $< -o $@
 
 $(LIBSPT_LIB_FILE):
 	$(MAKE) -C .. $@
