@@ -1,9 +1,6 @@
 # used commands and flags
 export CC ?= gcc
 export LDFLAGS += -lpthread
-export CFLAGS ?= -g -std=gnu99 -Werror -Wall -Wextra -Wfloat-equal -Wundef -Wshadow -Wcast-align -Wstrict-prototypes \
-	-Wstrict-overflow=5 -Wno-write-strings -Waggregate-return -Wcast-qual -Wswitch-default -Wswitch-enum \
-	-Wunreachable-code
 export LD ?= gcc
 export AR ?= ar
 export RM ?= rm
@@ -12,6 +9,10 @@ export ECHO ?= echo
 export SHELL ?= /bin/sh
 
 # libspt specific variables
+export LIBSPT_CFLAGS ?= -g -std=gnu99 -Werror -Wall -Wextra -Wfloat-equal -Wundef -Wshadow -Wcast-align -Wstrict-prototypes \
+	-Wstrict-overflow=5 -Wno-write-strings -Waggregate-return -Wcast-qual -Wswitch-default -Wswitch-enum \
+	-Wunreachable-code
+
 export LIBSPT_SRC_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))/src
 
 export LIBSPT_OBJS_DIR ?= $(abspath $(LIBSPT_SRC_DIR)/../build/libspt)

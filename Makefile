@@ -12,4 +12,4 @@ $(LIBSPT_LIB_FILE): $(LIBSPT_OBJS)
 	$(AR) rcs $(LIBSPT_LIB_FILE) $(LIBSPT_OBJS)
 
 $(LIBSPT_OBJS):
-	$(MAKE) -C src $@
+	$(MAKE) -C "$(LIBSPT_SRC_DIR)" $@
