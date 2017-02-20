@@ -22,10 +22,11 @@ makeNoLibevent:
     - "cd examples"
     - "NO_LIBEVENT=1 make"
 cmakeTests:
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+    GIT_SSL_NO_VERIFY: "true"
   stage: test
   script:
-    - "git submodule sync --recursive"
-    - "git submodule update --init --recursive"
     - "cd tests"
     - "mkdir build"
     - "cd build"
