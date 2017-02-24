@@ -41,7 +41,7 @@ int8_t init_serial_connection(const int fd);
  * @param portname The file name of the serial tty
  * @return A file descriptor on success, -1 otherwise
  */
-int connect_serial(char *portname);
+int connect_serial(const char *portname);
 
 #endif
 

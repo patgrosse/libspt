@@ -77,7 +77,7 @@ int8_t init_serial_connection(const int fd) {
     return 0;
 }
 
-int connect_serial(char *portname) {
+int connect_serial(const char *portname) {
     int fd = open(portname, O_RDWR | O_NOCTTY | O_SYNC);
     if (fd < 0) {
         perror("error opening serial connection");
