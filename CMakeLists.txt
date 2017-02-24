@@ -9,13 +9,12 @@ set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS} -g -Wfloat-equal -Wundef -Wshadow -Wca
 set(CMAKE_C_STANDARD 99)
 
 # dependencies
-include(${CMAKE_SOURCE_DIR}/cmake/FindLibEvent.cmake)
-include_directories(${CMAKE_SOURCE_DIR}/src/include)
+include(${CMAKE_CURRENT_LIST_DIR}/cmake/FindLibEvent.cmake)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/src/include)
 find_package(Threads)
 
 # files
 set(SOURCE_FILES
-        examples/serialexample.c
         src/data_fifo.c
         src/tty_utils.c
         src/serial_io.c
@@ -24,9 +23,12 @@ set(SOURCE_FILES
         src/base64.c)
 
 # targets
-add_executable(serialexample ${SOURCE_FILES})
-target_link_libraries(serialexample ${LIBEVENT_LIB})
-target_link_libraries(serialexample ${CMAKE_THREAD_LIBS_INIT})
+add_library(libspt ${SOURCE_FILES})
+target_link_libraries(libspt ${LIBEVENT_LIB})
+target_link_libraries(libspt ${CMAKE_THREAD_LIBS_INIT})
+
+add_executable(libspt_serialexample examples/serialexample.c)
+target_link_libraries(libspt_serialexample libspt)
 
 # tests
 add_subdirectory(tests)

@@ -1,7 +1,13 @@
 cmake_minimum_required(VERSION 3.0)
 project(libspt_tests)
 
-add_subdirectory(lib/googletest/googletest)
+find_package(GTest)
+if (GTEST_FOUND)
+    include_directories(${GTEST_INCLUDE_DIRS})
+else()
+    add_subdirectory(lib/googletest/googletest)
+    include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+endif()
 
 set(CMAKE_C_FLAGS "-Werror -Wall -Wextra -std=gnu99")
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS} -g -Wfloat-equal -Wundef -Wshadow -Wcast-align \
