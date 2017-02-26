@@ -119,7 +119,7 @@ int8_t process_message(struct spt_context *sptctx, char *workbuf, size_t len) {
             printf("%s", buf);
             fflush(stdout);
         } else {
-            log_msg("data", "%s", buf);
+            spt_log_msg("data", "%s", buf);
             sptctx->log_in_line = true;
         }
         return 0;
@@ -129,7 +129,7 @@ int8_t process_message(struct spt_context *sptctx, char *workbuf, size_t len) {
             printf("%s\n", workbuf);
             fflush(stdout);
         } else {
-            log_msg("data", "%s\n", workbuf);
+            spt_log_msg("data", "%s\n", workbuf);
         }
         sptctx->log_in_line = false;
         size_t offset = (size_t) index_lf + 1;

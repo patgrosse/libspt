@@ -11,7 +11,7 @@
 #include <spt_logger.h>
 #include <unused.h>
 
-void log_msg(const char *namespace, const char *msg, ...) {
+void spt_log_msg(const char *category, const char *msg, ...) {
     time_t rawtime;
     struct tm *timeinfo;
     char timebuf[21];
@@ -27,6 +27,6 @@ void log_msg(const char *namespace, const char *msg, ...) {
     va_start(vl, msg);
     vsprintf(buf, msg, vl);
     strftime(timebuf, 21, "%Y-%m-%dT%H:%M:%SZ", timeinfo);
-    printf("%s [INFO] %s - %s", timebuf, namespace, buf);
+    printf("%s [INFO] %s - %s", timebuf, category, buf);
     fflush(stdout);
 }

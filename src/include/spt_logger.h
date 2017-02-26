@@ -15,10 +15,10 @@
 
 /**
  * Log a message printf style
- * @param namespace A category for the message (eg. the thread name)
+ * @param category A category for the message (eg. the thread name)
  * @param msg The format of the message
  * @param ... The format arguments
  */
-void log_msg(const char *namespace, const char *msg, ...);
+void spt_log_msg(const char *category, const char *msg, ...);
 
 #endif //LIBSPT_LOGGER_H
