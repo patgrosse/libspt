@@ -18,12 +18,17 @@
 #include <serial_io.h>
 
 /**
- * A character determining the start of a packet
+ * @brief A character determining the start of a packet
  */
 #define SPT_PACKET_CHAR 0x1C
 
 /**
- * The data type of the base64 data character amount in a packet
+ * @brief Default category for not packet data logging
+ */
+#define SPT_LOG_STANDARD_CATEGORY "serial"
+
+/**
+ * @brief The data type of the base64 data character amount in a packet
  */
 typedef uint16_t base64_len_t;
 
@@ -40,7 +45,7 @@ struct serial_data_packet {
 };
 
 /**
- * Function signature for the callback that is called when a packet is received and successfully parsed
+ * @brief Function signature for the callback that is called when a packet is received and successfully parsed
  */
 typedef void(*received_packet_cb)(struct spt_context *, struct serial_data_packet *);
 
@@ -72,7 +77,8 @@ struct spt_context {
 };
 
 /**
- * Initialize a spt context with a given serial_io_context and a callback for received packets
+ * @brief Initialize a spt context with a given serial_io_context and a callback for received packets
+ *
  * @param sptctx The context to initialize
  * @param sictx The serial_io_context to receive data from and to send data to
  * @param callback A function that should be called when a packet is received
@@ -80,13 +86,15 @@ struct spt_context {
 void spt_init_context(struct spt_context *sptctx, struct serial_io_context *sictx, received_packet_cb callback);
 
 /**
- * Start the underlying serial io data dispatcher
+ * @brief Start the underlying serial io data dispatcher
+ *
  * @param sptctx The context to start the dispatcher for
  */
 void spt_start(struct spt_context *sptctx);
 
 /**
- * Send a packet
+ * @brief Send a packet
+ *
  * @param sptctx The context for this packet transfer
  * @param packet The packet to transfer
  * @return On success the positive amount of transferred bytes, a negative value on error
@@ -94,7 +102,8 @@ void spt_start(struct spt_context *sptctx);
 int8_t spt_send_packet(const struct spt_context *sptctx, const struct serial_data_packet *packet);
 
 /**
- * Stop the underlying serial io data dispatcher
+ * @brief Stop the underlying serial io data dispatcher
+ *
  * @param sptctx The context to stop the dispatcher for
  */
 void spt_stop(struct spt_context *sptctx);

@@ -19,7 +19,7 @@ void handle_received_packet(struct spt_context *sptctx, struct serial_data_packe
     packetdatabuf[packet->len] = '\0';
     spt_log_msg("packet", "Data of packet is %s\n", packetdatabuf);
     if (sptctx->log_in_line) {
-        spt_log_msg("data", "");
+        spt_log_msg(SPT_LOG_STANDARD_CATEGORY, "");
     }
 }
 
