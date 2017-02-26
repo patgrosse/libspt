@@ -13,13 +13,13 @@ void handle_received_packet(struct spt_context *sptctx, struct serial_data_packe
     if (sptctx->log_in_line) {
         putchar('\n');
     }
-    log_msg("packet", "Received packet with length %d\n", packet->len);
+    spt_log_msg("packet", "Received packet with length %d\n", packet->len);
     char packetdatabuf[packet->len + 1];
     memcpy(packetdatabuf, packet->data, packet->len);
     packetdatabuf[packet->len] = '\0';
-    log_msg("packet", "Data of packet is %s\n", packetdatabuf);
+    spt_log_msg("packet", "Data of packet is %s\n", packetdatabuf);
     if (sptctx->log_in_line) {
-        log_msg("data", "");
+        spt_log_msg("data", "");
     }
 }
 
@@ -37,10 +37,10 @@ int main(int argc, char *argv[]) {
     serial_io_context_init(&sictx, serialfd, serialfd);
     struct spt_context sptctx;
     spt_init_context(&sptctx, &sictx, handle_received_packet);
-    log_msg("main", "Starting SPT...\n");
+    spt_log_msg("main", "Starting SPT...\n");
     spt_start(&sptctx);
     sleep(1);
-    log_msg("main", "Sending packet...\n");
+    spt_log_msg("main", "Sending packet...\n");
     struct serial_data_packet pkt;
     pkt.data = "heydevice";
     pkt.len = 9;
