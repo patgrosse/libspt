@@ -4,6 +4,7 @@ stages:
   - build
   - test
   - docs
+  - deploy
 before_script:
   - "apt-get update -qq && apt-get install -y -qq libevent-dev"
 makeclean:
@@ -44,3 +45,17 @@ doxygenDocs:
   artifacts:
     paths:
       - "build/doxygen"
+pages:
+  stage: deploy
+  dependencies:
+    - doxygenDocs
+  before_script: []
+  script:
+    - "rm -rf public"
+    - "mkdir -p public/doxygen"
+    - "cp -r build/doxygen/html/* public/doxygen"
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
