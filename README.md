@@ -6,6 +6,11 @@
 C library for transferring binary data packets over a single serial data connection side by side with log entries and
 other plain text messages.
 
+## Packet layout
+A packet containing binary data sent by libspt has the following layout:
+
+![libspt packet layout](docs/libspt_packet_structure.jpg)
+
 ## Dependencies
 * pthreads
 * libevent (optional)
