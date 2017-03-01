@@ -42,6 +42,8 @@ doxygenDocs:
   script:
     - "mkdir -p build/doxygen"
     - "doxygen Doxyfile"
+    - "mkdir -p build/doxygen/html/docs"
+    - "cp -r docs/img build/doxygen/html/docs"
   artifacts:
     paths:
       - "build/doxygen"

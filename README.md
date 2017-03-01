@@ -9,7 +9,7 @@ other plain text messages.
 ## Packet layout
 A packet containing binary data sent by libspt has the following layout:
 
-![libspt packet layout](docs/libspt_packet_structure.jpg)
+![libspt packet layout](docs/img/libspt_packet_structure.jpg)
 
 ## Dependencies
 * pthreads
