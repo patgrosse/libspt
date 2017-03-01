@@ -48,7 +48,7 @@ ssize_t fifo_read(fifo_t *f, void *buf, const size_t bytes) {
         }
     }
     size_t i;
-    char *p;
+    uint8_t *p;
     p = buf;
     for (i = 0; i < bytes; i++) {
         if (f->tail != f->head || f->full) { //see if any data is available
@@ -78,7 +78,7 @@ ssize_t fifo_write(fifo_t *f, const void *buf, const size_t bytes) {
     }
     ssize_t written_bytes;
     size_t i;
-    const char *p;
+    const uint8_t *p;
     p = buf;
     for (i = 0; i < bytes; i++) {
         //first check to see if there is space in the buffer

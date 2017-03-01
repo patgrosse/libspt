@@ -13,8 +13,8 @@
  * @author  Patrick Grosse <patrick.grosse@uni-muenster.de>
  */
 
-#ifndef LIBSPT_CHAR_FIFO_H
-#define LIBSPT_CHAR_FIFO_H
+#ifndef LIBSPT_DATA_FIFO_H
+#define LIBSPT_DATA_FIFO_H
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -24,7 +24,7 @@
  */
 typedef struct {
     /** @brief The internal buffer */
-    char *buf;
+    uint8_t *buf;
     /** @brief Head index */
     size_t head;
     /** @brief Tail index */
@@ -79,4 +79,4 @@ void fifo_destroy(fifo_t *f);
  */
 bool fifo_empty(fifo_t *f);
 
-#endif //LIBSPT_CHAR_FIFO_H
+#endif //LIBSPT_DATA_FIFO_H
