@@ -4,16 +4,16 @@
  *  Copyright (C) 2017 Patrick Grosse <patrick.grosse@uni-muenster.de>
  */
 
-#include <stdio.h>
+#include <spt.h>
+
 #include <memory.h>
 #include <malloc.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <netinet/in.h>
 
-#include <spt.h>
 #include <spt_logger.h>
 #include <base64.h>
-#include <netinet/in.h>
 
 ssize_t index_of_char(const char *haystack, const size_t size, const char needle) {
     for (size_t i = 0; i < size; i++) {

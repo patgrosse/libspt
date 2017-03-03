@@ -18,6 +18,8 @@
 
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <pthread.h>
 
 /**
  * @brief Represents a circular FIFO queue

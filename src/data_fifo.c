@@ -7,12 +7,10 @@
  * based on https://stratifylabs.co/embedded%20design%20tips/2013/10/02/Tips-A-FIFO-Buffer-Implementation/
  */
 
-#include <pthread.h>
+#include <data_fifo.h>
+
 #include <malloc.h>
 #include <errno.h>
-#include <stdio.h>
-
-#include <data_fifo.h>
 
 int8_t fifo_init(fifo_t *f, const size_t size) {
     if (size == 0) {

@@ -9,11 +9,11 @@
 
 #ifndef NO_TERMIOS
 
+#include <tty_utils.h>
+
 #include <stdio.h>
 #include <sys/ioctl.h>
 #include <fcntl.h>
-
-#include <tty_utils.h>
 
 int8_t set_interface_attribs(int fd, speed_t speed) {
     struct termios tty;

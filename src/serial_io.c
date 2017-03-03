@@ -4,21 +4,21 @@
  *  Copyright (C) 2017 Patrick Grosse <patrick.grosse@uni-muenster.de>
  */
 
+#include <serial_io.h>
+
 #include <unistd.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <signal.h>
+#include <memory.h>
+
+#include <unused.h>
 
 #ifndef NO_LIBEVENT
 
 #include <event.h>
 
 #endif
-
-#include <serial_io.h>
-#include <unused.h>
-#include <signal.h>
-#include <memory.h>
 
 bool runningbit = true;
 

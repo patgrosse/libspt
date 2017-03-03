@@ -4,12 +4,11 @@
  *  Copyright (C) 2017 Patrick Grosse <patrick.grosse@uni-muenster.de>
  */
 
+#include <spt_logger.h>
+
 #include <time.h>
 #include <stdio.h>
 #include <stdarg.h>
-
-#include <spt_logger.h>
-#include <unused.h>
 
 void spt_log_msg(const char *category, const char *msg, ...) {
     time_t rawtime;
@@ -17,12 +16,8 @@ void spt_log_msg(const char *category, const char *msg, ...) {
     char timebuf[21];
     char buf[2000];
 
-    UNUSED(timebuf);
-    UNUSED(buf);
-
     time(&rawtime);
     timeinfo = localtime(&rawtime);
-    UNUSED(timeinfo);
     va_list vl;
     va_start(vl, msg);
     vsprintf(buf, msg, vl);
