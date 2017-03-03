@@ -41,7 +41,7 @@ struct serial_data_packet {
     /** @brief Length of the data in this packet */
     uint16_t len;
     /** @brief Data in this packet */
-    char *data;
+    uint8_t *data;
 };
 
 /**

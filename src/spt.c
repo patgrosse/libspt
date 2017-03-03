@@ -59,7 +59,7 @@ int8_t process_packet(struct spt_context *sptctx, char *workbuf, size_t len) {
                 int ret;
                 if ((ret = base64_decode((unsigned char *) sptctx->received_base64_data_bytes,
                                          sptctx->received_base64_data_bytes_amount,
-                                         (unsigned char *) pkt->data,
+                                         pkt->data,
                                          &real_data_buffer_size)) != BASE64_SUCCESS) {
                     free(pkt->data);
                     free(pkt);
@@ -190,7 +190,7 @@ void spt_start(struct spt_context *sptctx) {
 }
 
 int8_t spt_send_packet(const struct spt_context *sptctx, const struct serial_data_packet *packet) {
-    int ret;
+    int8_t ret;
     unsigned char lenbytes[sizeof(base64_len_t)];
     size_t base64_size_len = base64_required_size_in_base64(sizeof(base64_len_t));
     size_t base64_data_len = base64_required_size_in_base64(packet->len);
@@ -198,7 +198,7 @@ int8_t spt_send_packet(const struct spt_context *sptctx, const struct serial_dat
     unsigned char base64_data[base64_data_len];
     uint16_t packetsize;
 
-    if ((ret = base64_encode((unsigned char *) packet->data, packet->len, base64_data, &base64_data_len)) !=
+    if ((ret = base64_encode(packet->data, packet->len, base64_data, &base64_data_len)) !=
         BASE64_SUCCESS) {
         return ret;
     }

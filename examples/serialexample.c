@@ -42,7 +42,8 @@ int main(int argc, char *argv[]) {
     sleep(1);
     spt_log_msg("main", "Sending packet...\n");
     struct serial_data_packet pkt;
-    pkt.data = "heydevice";
+    pkt.data = malloc(9);
+    memcpy(pkt.data, "heydevice", 9);
     pkt.len = 9;
     spt_send_packet(&sptctx, &pkt);
     write(serialfd, "general message\n", 16);
