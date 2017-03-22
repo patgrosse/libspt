@@ -1,12 +1,10 @@
-image: rikorose/gcc-cmake
+image: patgrosse/riotsensors-build
 stages:
   - clean
   - build
   - test
   - docs
   - deploy
-before_script:
-  - "apt-get update -qq && apt-get install -y -qq libevent-dev"
 makeclean:
   stage: clean
   script:
@@ -35,7 +33,6 @@ cmakeTests:
     - "make"
     - "./runTests"
 doxygenDocs:
-  before_script: []
   stage: docs
   image: iimuz/doxygen
   when: always
@@ -51,7 +48,6 @@ pages:
   stage: deploy
   dependencies:
     - doxygenDocs
-  before_script: []
   when: always
   script:
     - "rm -rf public"
