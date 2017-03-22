@@ -16,6 +16,10 @@
 #ifndef LIBSPT_TTY_UTILS_H
 #define LIBSPT_TTY_UTILS_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef NO_TERMIOS
 
 #include <termios.h>
@@ -43,6 +47,10 @@ int8_t init_serial_connection(const int fd);
  */
 int connect_serial(const char *portname);
 
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif //LIBSPT_TTY_UTILS_H

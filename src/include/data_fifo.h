@@ -21,6 +21,10 @@
 #include <stdio.h>
 #include <pthread.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * @brief Represents a circular FIFO queue
  */
@@ -80,5 +84,9 @@ void fifo_destroy(fifo_t *f);
  * @return True if the queue is empty
  */
 bool fifo_empty(fifo_t *f);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //LIBSPT_DATA_FIFO_H

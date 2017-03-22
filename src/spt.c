@@ -30,7 +30,7 @@ int8_t process_packet(struct spt_context *sptctx, char *workbuf, size_t len) {
     if (!sptctx->processing_packet) {
         sptctx->processing_packet = true;
         sptctx->recv_base64_len_bytes_amount = 0;
-        sptctx->recv_base64_len_bytes = malloc(base64_required_size_in_base64(sizeof(base64_len_t)));
+        sptctx->recv_base64_len_bytes = (char *) malloc(base64_required_size_in_base64(sizeof(base64_len_t)));
         if (sptctx->recv_base64_len_bytes == NULL) {
             return ENOMEM;
         }
@@ -46,13 +46,13 @@ int8_t process_packet(struct spt_context *sptctx, char *workbuf, size_t len) {
             sptctx->received_base64_data_bytes[sptctx->received_base64_data_bytes_amount] = (unsigned char) workbuf[read_index];
             sptctx->received_base64_data_bytes_amount++;
             if (sptctx->received_base64_data_bytes_amount == sptctx->expected_base64_data_bytes_amount) {
-                struct serial_data_packet *pkt = malloc(sizeof(struct serial_data_packet));
+                struct serial_data_packet *pkt = (struct serial_data_packet *) malloc(sizeof(struct serial_data_packet));
                 if (pkt == NULL) {
                     return ENOMEM;
                 }
                 size_t real_data_buffer_size = base64_required_size_from_base64(
                         sptctx->received_base64_data_bytes_amount);
-                pkt->data = malloc(real_data_buffer_size);
+                pkt->data = (uint8_t *) malloc(real_data_buffer_size);
                 if (pkt->data == NULL) {
                     return ENOMEM;
                 }
@@ -94,7 +94,7 @@ int8_t process_packet(struct spt_context *sptctx, char *workbuf, size_t len) {
                 }
                 sptctx->expected_base64_data_bytes_amount = ntohs(sptctx->expected_base64_data_bytes_amount);
                 free(sptctx->recv_base64_len_bytes);
-                sptctx->received_base64_data_bytes = malloc(sptctx->expected_base64_data_bytes_amount);
+                sptctx->received_base64_data_bytes = (char *) malloc(sptctx->expected_base64_data_bytes_amount);
                 if (sptctx->received_base64_data_bytes == NULL) {
                     return ENOMEM;
                 }
@@ -158,7 +158,7 @@ int8_t process_data(struct spt_context *sptctx, char *workbuf, size_t len) {
 }
 
 void data_received(const size_t len, const char *buf, void *arg) {
-    struct spt_context *sptctx = arg;
+    struct spt_context *sptctx = (struct spt_context *) arg;
     char workbuf[len];
     if (workbuf != NULL) {
         memcpy(workbuf, buf, len);
@@ -209,14 +209,14 @@ int8_t spt_send_packet(const struct spt_context *sptctx, const struct serial_dat
         return ret;
     }
     packetsize = sizeof(char) + base64_size_len + base64_data_len;
-    char *pkt_ptr = malloc(packetsize);
+    uint8_t *pkt_ptr = (uint8_t *) malloc(packetsize);
     if (pkt_ptr == NULL) {
         return ENOMEM;
     }
     *pkt_ptr = SPT_PACKET_CHAR;
-    char *len_ptr = pkt_ptr + sizeof(char);
+    uint8_t *len_ptr = pkt_ptr + sizeof(char);
     memcpy(len_ptr, base64_size, base64_size_len);
-    char *data_ptr = len_ptr + base64_size_len;
+    uint8_t *data_ptr = len_ptr + base64_size_len;
     memcpy(data_ptr, base64_data, base64_data_len);
     ret = serial_io_write(sptctx->sictx, packetsize, pkt_ptr);
     free(pkt_ptr);

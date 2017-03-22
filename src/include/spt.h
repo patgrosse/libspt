@@ -17,6 +17,10 @@
 
 #include <serial_io.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * @brief A character determining the start of a packet
  */
@@ -107,5 +111,9 @@ int8_t spt_send_packet(const struct spt_context *sptctx, const struct serial_dat
  * @param sptctx The context to stop the dispatcher for
  */
 void spt_stop(struct spt_context *sptctx);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //LIBSPT_SPT_H

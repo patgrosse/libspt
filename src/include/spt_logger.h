@@ -13,6 +13,10 @@
 #ifndef LIBSPT_LOGGER_H
 #define LIBSPT_LOGGER_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Log a message printf style
  * @param category A category for the message (eg. the thread name)
@@ -20,5 +24,9 @@
  * @param ... The format arguments
  */
 void spt_log_msg(const char *category, const char *msg, ...);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //LIBSPT_LOGGER_H

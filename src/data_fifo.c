@@ -22,7 +22,7 @@ int8_t fifo_init(fifo_t *f, const size_t size) {
     f->tail = 0;
     f->full = false;
     f->size = size;
-    f->buf = malloc(size);
+    f->buf = (uint8_t *) malloc(size);
     if (pthread_mutex_init(&f->mutex, NULL)) {
         perror("Error while initializing FIFO mutex");
         return -1;
@@ -47,7 +47,7 @@ ssize_t fifo_read(fifo_t *f, void *buf, const size_t bytes) {
     }
     size_t i;
     uint8_t *p;
-    p = buf;
+    p = (uint8_t *) buf;
     for (i = 0; i < bytes; i++) {
         if (f->tail != f->head || f->full) { //see if any data is available
             *p++ = f->buf[f->tail];  //grab a byte from the buffer
@@ -77,7 +77,7 @@ ssize_t fifo_write(fifo_t *f, const void *buf, const size_t bytes) {
     ssize_t written_bytes;
     size_t i;
     const uint8_t *p;
-    p = buf;
+    p = (const uint8_t *) buf;
     for (i = 0; i < bytes; i++) {
         //first check to see if there is space in the buffer
         if (f->full) {

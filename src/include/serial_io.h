@@ -17,6 +17,10 @@
 
 #include <data_fifo.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * The default cache size for the internal cache
  */
@@ -98,7 +102,7 @@ int8_t serial_io_dispatch_start(struct serial_io_context *sictx);
  * @param data The data buffer
  * @return 0 on success
  */
-int8_t serial_io_write(struct serial_io_context *sictx, size_t len, const void *data);
+int8_t serial_io_write(struct serial_io_context *sictx, size_t len, const uint8_t *data);
 
 /**
  * Cancel the threads of a serial context
@@ -106,5 +110,9 @@ int8_t serial_io_write(struct serial_io_context *sictx, size_t len, const void *
  * @return 0 on success
  */
 int8_t serial_io_dispatch_stop(struct serial_io_context *sictx);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //LIBSPT_SERIAL_IO_H

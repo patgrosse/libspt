@@ -1,8 +1,6 @@
 #include <gtest/gtest.h>
 
-extern "C" {
 #include <data_fifo.h>
-}
 
 TEST(data_fifo, simple) {
     fifo_t my_fifo;

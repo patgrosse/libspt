@@ -13,9 +13,17 @@
 #ifndef LIBSPT_UNUSED_H
 #define LIBSPT_UNUSED_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Prevents an unused variable from generating compiler warnings
  */
 #define UNUSED(arg) (void) arg
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //LIBSPT_UNUSED_H

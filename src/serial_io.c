@@ -23,7 +23,7 @@
 bool runningbit = true;
 
 void *run_output_data(void *arg) {
-    struct serial_io_context *sictx = arg;
+    struct serial_io_context *sictx = (struct serial_io_context *) arg;
     while (runningbit) {
         ssize_t readbytes = fifo_read(sictx->read_fifo, sictx->print_buffer, sictx->print_buffer_size);
         if (readbytes == -1) {
@@ -40,7 +40,7 @@ void *run_output_data(void *arg) {
 
 void read_to_fifo(int fd, short events, void *arg) {
     UNUSED(events);
-    struct serial_io_context *sictx = arg;
+    struct serial_io_context *sictx = (struct serial_io_context *) arg;
     ssize_t ret = read(fd, sictx->read_buffer, sictx->read_buffer_size);
     if (ret == 0) {
         printf("\nSerial data stream closed\n");
@@ -70,7 +70,7 @@ void event_interrupted(int sig) {
 #endif
 
 void *run_event_dispatcher(void *arg) {
-    struct serial_io_context *sictx = arg;
+    struct serial_io_context *sictx = (struct serial_io_context *) arg;
 #ifdef NO_LIBEVENT
     while (runningbit) {
         read_to_fifo(sictx->fd_in, 0, sictx);
@@ -111,7 +111,7 @@ int8_t serial_io_dispatch_start(struct serial_io_context *sictx) {
         perror("Incorrect out file descriptor given");
         return -1;
     }
-    sictx->read_fifo = malloc(sizeof(fifo_t));
+    sictx->read_fifo = (fifo_t *) malloc(sizeof(fifo_t));
     if (sictx->read_fifo == NULL) {
         errno = ENOMEM;
         perror("Could not allocate size for FIFO");
@@ -121,15 +121,15 @@ int8_t serial_io_dispatch_start(struct serial_io_context *sictx) {
         return -1;
     }
 
-    sictx->read_buffer = malloc(sictx->read_buffer_size);
-    sictx->print_buffer = malloc(sictx->print_buffer_size + 1);
+    sictx->read_buffer = (char *) malloc(sictx->read_buffer_size);
+    sictx->print_buffer = (char *) malloc(sictx->print_buffer_size + 1);
 
     pthread_create(&sictx->print_thread, NULL, run_output_data, sictx);
     pthread_create(&sictx->event_thread, NULL, run_event_dispatcher, sictx);
     return 0;
 }
 
-int8_t serial_io_write(struct serial_io_context *sictx, size_t len, const void *data) {
+int8_t serial_io_write(struct serial_io_context *sictx, size_t len, const uint8_t *data) {
     size_t totalwritten = 0;
     ssize_t ret;
     while (totalwritten < len) {
