@@ -89,4 +89,8 @@ int connect_serial(const char *portname) {
     return fd;
 }
 
+#else
+
+typedef int make_iso_compilers_happy;
+
 #endif
