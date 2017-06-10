@@ -9,11 +9,11 @@ else()
     include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 endif()
 
-set(CMAKE_C_FLAGS "-Werror -Wall -Wextra -std=gnu99")
+set(CMAKE_C_FLAGS "-Werror -Wall -Wextra")
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS} -g -Wfloat-equal -Wundef -Wshadow -Wcast-align \
 -Wstrict-prototypes -Wstrict-overflow=5 -Wno-write-strings -Waggregate-return -Wcast-qual -Wswitch-default \
 -Wswitch-enum -Wunreachable-code")
-set(CMAKE_C_STANDARD 99)
+use_c99()
 
 # dependencies
 include(../cmake/FindLibEvent.cmake)

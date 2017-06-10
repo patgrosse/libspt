@@ -1,12 +1,22 @@
 cmake_minimum_required(VERSION 3.0)
 project(libspt)
 
+macro(use_c99)
+    if (CMAKE_VERSION VERSION_LESS "3.1")
+        if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
+            set (CMAKE_C_FLAGS "-std=gnu99 ${CMAKE_C_FLAGS}")
+        endif ()
+    else ()
+        set (CMAKE_C_STANDARD 99)
+    endif ()
+endmacro(use_c99)
+
 # flags
-set(CMAKE_C_FLAGS "-Werror -Wall -Wextra -std=gnu99")
+set(CMAKE_C_FLAGS "-Werror -Wall -Wextra")
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS} -g -Wfloat-equal -Wundef -Wshadow -Wcast-align \
 -Wstrict-prototypes -Wstrict-overflow=5 -Wno-write-strings -Waggregate-return -Wcast-qual -Wswitch-default \
 -Wswitch-enum -Wunreachable-code")
-set(CMAKE_C_STANDARD 99)
+use_c99()
 
 # dependencies
 include(${CMAKE_CURRENT_LIST_DIR}/cmake/FindLibEvent.cmake)
