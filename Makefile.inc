@@ -17,7 +17,7 @@ export LIBSPT_SRC_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))
 
 export LIBSPT_OBJS_DIR ?= $(abspath $(LIBSPT_SRC_DIR)/../build/libspt)
 
-export LIBSPT_LIB_FILE ?= $(abspath $(LIBSPT_SRC_DIR)/../build/libspt/libspt.a)
+export LIBSPT_LIB_FILE ?= $(abspath $(LIBSPT_OBJS_DIR)/libspt.a)
 
 export LIBSPT_INCLUDES += -I$(LIBSPT_SRC_DIR)/include
 
