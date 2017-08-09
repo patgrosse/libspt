@@ -209,7 +209,7 @@ int8_t spt_send_packet(const struct spt_context *sptctx, const struct serial_dat
         return ret;
     }
     packetsize = sizeof(char) + base64_size_len + base64_data_len;
-    uint8_t *pkt_ptr = (uint8_t *) malloc(packetsize);
+    uint8_t pkt_ptr[packetsize];
     if (pkt_ptr == NULL) {
         return ENOMEM;
     }
@@ -219,7 +219,6 @@ int8_t spt_send_packet(const struct spt_context *sptctx, const struct serial_dat
     uint8_t *data_ptr = len_ptr + base64_size_len;
     memcpy(data_ptr, base64_data, base64_data_len);
     ret = serial_io_write(sptctx->sictx, packetsize, pkt_ptr);
-    free(pkt_ptr);
     return ret;
 }
 
