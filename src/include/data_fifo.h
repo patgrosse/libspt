@@ -60,7 +60,7 @@ int8_t fifo_init(fifo_t *f, size_t size);
  * @param bytes The maximum number of bytes to read
  * @return The number of bytes read, -1 on error
  */
-ssize_t fifo_read(fifo_t *f, void *buf, const size_t bytes);
+ssize_t fifo_read(fifo_t *f, void *buf, size_t bytes);
 
 /**
  * Write data to the FIFO
@@ -70,7 +70,7 @@ ssize_t fifo_read(fifo_t *f, void *buf, const size_t bytes);
  * @param bytes The amount of bytes to be written
  * @return The amount of bytes actually written, -1 on error
  */
-ssize_t fifo_write(fifo_t *f, const void *buf, const size_t bytes);
+ssize_t fifo_write(fifo_t *f, const void *buf, size_t bytes);
 
 /**
  * Free the resources reserved by a FIFO structure

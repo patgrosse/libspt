@@ -47,7 +47,7 @@ static char getsymbol(unsigned char code) {
     return (char) BASE64_NOT_DEFINED;
 }
 
-int8_t base64_encode(unsigned char *data_in, size_t data_in_size, \
+int8_t base64_encode(const unsigned char *data_in, size_t data_in_size, \
                   unsigned char *base64_out, size_t *base64_out_size) {
     size_t required_size = base64_required_size_in_base64(data_in_size);
 
@@ -112,7 +112,7 @@ int8_t base64_encode(unsigned char *data_in, size_t data_in_size, \
 /*
  *  returns the corresponding base64 code for the given ascii symbol
  */
-static int getcode(char symbol) {
+static int getcode(const char symbol) {
     if (symbol == '/') {
         return BASE64_SLASH;
     }

@@ -52,7 +52,7 @@ extern "C" {
             BASE64_ERROR_DATA_IN if `data_in` equals NULL,
             BASE64_ERROR_DATA_IN_SIZE if `data_in_size` is less then 1.
  */
-int8_t base64_encode(unsigned char *data_in, size_t data_in_size, \
+int8_t base64_encode(const unsigned char *data_in, size_t data_in_size, \
                   unsigned char *base64_out, size_t *base64_out_size);
 
 /**

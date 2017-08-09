@@ -38,7 +38,7 @@ int8_t set_interface_attribs(int fd, speed_t speed);
  * @param fd The file descriptor of the serial connection
  * @return 0 on success
  */
-int8_t init_serial_connection(const int fd);
+int8_t init_serial_connection(int fd);
 
 /**
  * Open a serial tty file descriptor
